@@ -109,7 +109,9 @@ export function Board() {
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-      <div className="flex gap-4 p-6 items-start">
+      {/* Horizontal padding is managed by the page wrapper; board only handles
+          column layout and the gap between them. */}
+      <div className="flex gap-4 items-start">
         {columns.map(col => (
           <Column key={col.id} column={col} onAddCard={addCard} onDeleteCard={deleteCard} />
         ))}

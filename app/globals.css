@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light-mode fallback — not actively used. The app always runs in dark mode
+     via class="dark" on <html>, but keeping :root values prevents any flash or
+     miscalculation if the class is momentarily absent during hydration. */
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
@@ -19,7 +24,32 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 47.4% 11.2%;
-    --radius: 0.5rem;
+    /* 2 px — maximum corner rounding per design guidelines. All rounded-*
+       utilities in tailwind.config.ts resolve to this value. */
+    --radius: 0.125rem;
+  }
+
+  /* Dark theme — always active. Values chosen so the visual stack has clear
+     depth: background (darkest) < muted/columns < card/tiles. */
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+    --card: 217 32% 16%;
+    --card-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 20%;
+    --secondary-foreground: 210 40% 98%;
+    /* muted is used for column backgrounds — one step above the page bg */
+    --muted: 217.2 32.6% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 22%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 22%;
+    --input: 217.2 32.6% 22%;
+    --ring: 212.7 26.8% 83.9%;
   }
 
   * {
